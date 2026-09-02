@@ -1,0 +1,30 @@
+[build-system]
+requires = ["uv_build>=0.10.11,<0.11.0"]
+build-backend = "uv_build"
+
+[project]
+name = "cbf-rl-humanoid"
+version = "0.1.0"
+description = "MJLab Unitree G1 walking task with learned CBF-RL obstacle avoidance"
+requires-python = "==3.10.*"
+dependencies = [
+  "mjlab==1.6.0",
+  "torch==2.9.1",
+]
+
+[project.entry-points."mjlab.tasks"]
+cbf_rl_humanoid = "cbf_rl_humanoid"
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu128", marker = "sys_platform == 'linux'" }
+
+[[tool.uv.index]]
+url = "https://pypi.org/simple"
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[dependency-groups]
+dev = ["pytest>=8.0"]
